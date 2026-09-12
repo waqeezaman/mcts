@@ -71,3 +71,7 @@ Testing/
 
 # VS Code 
 .vscode/
+
+
+## Doxygen
+docs/
