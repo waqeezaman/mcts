@@ -1,7 +1,12 @@
 include(GoogleTest)
 
 # Create test runner executable
-add_executable(mcts_tests test.cpp)
+add_executable(mcts_tests
+    test.cpp
+    state_contract_tests.cpp
+    mcts_unit_tests.cpp
+    mcts_integration_tests.cpp
+)
 
 # Link mcts and GoogleTest's main function
 target_link_libraries(mcts_tests
