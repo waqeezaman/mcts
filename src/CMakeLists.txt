@@ -1,5 +1,5 @@
 add_library(mcts
-    test.cpp
+    search.cpp
 )
 
 target_include_directories(mcts
