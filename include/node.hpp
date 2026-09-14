@@ -37,6 +37,10 @@ struct Node {
     /// Child nodes generated from legal moves in the current state.
     std::vector<std::shared_ptr<Node<State, Move>>> children;
 
+    explicit Node(State initial_state)
+        : state(initial_state),
+          total_score(state.getNumPlayers(), 0.0f) {}
+
     /**
      * @brief Returns whether this node has no children.
      * @return `true` if the node is a leaf; otherwise `false`.

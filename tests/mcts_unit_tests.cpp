@@ -1,13 +1,11 @@
 #include "test_helpers.hpp"
 
 TEST(MCTSUnitTests, Ucb_ZeroVisitChildReturnsInfinity) {
-    auto parent = std::make_shared<Node<CoinFlipState, Move>>();
-    parent->state = CoinFlipState();
+    auto parent = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     parent->visits = 1;
     parent->total_score = {1.0f};
 
-    auto child = std::make_shared<Node<CoinFlipState, Move>>();
-    child->state = CoinFlipState();
+    auto child = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     child->visits = 0;
     child->total_score = {0.0f};
 
@@ -17,13 +15,11 @@ TEST(MCTSUnitTests, Ucb_ZeroVisitChildReturnsInfinity) {
 }
 
 TEST(MCTSUnitTests, Ucb_IncludesAverageRewardAndExploration) {
-    auto parent = std::make_shared<Node<CoinFlipState, Move>>();
-    parent->state = CoinFlipState();
+    auto parent = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     parent->visits = 10;
     parent->total_score = {50.0f};
 
-    auto child = std::make_shared<Node<CoinFlipState, Move>>();
-    child->state = CoinFlipState();
+    auto child = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     child->visits = 5;
     child->total_score = {20.0f};
 
@@ -34,20 +30,17 @@ TEST(MCTSUnitTests, Ucb_IncludesAverageRewardAndExploration) {
 }
 
 TEST(MCTSUnitTests, SelectNode_ChoosesHighestUcbChild) {
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     root->visits = 10;
     root->total_score = {50.0f};
 
-    auto strong_child = std::make_shared<Node<CoinFlipState, Move>>();
-    strong_child->state = CoinFlipState();
+    auto strong_child = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     strong_child->visits = 10;
     strong_child->total_score = {50.0f};
     strong_child->parent = root;
     strong_child->move_from_parent = 0;
 
-    auto weak_child = std::make_shared<Node<CoinFlipState, Move>>();
-    weak_child->state = CoinFlipState();
+    auto weak_child = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     weak_child->visits = 10;
     weak_child->total_score = {0.0f};
     weak_child->parent = root;
@@ -61,8 +54,7 @@ TEST(MCTSUnitTests, SelectNode_ChoosesHighestUcbChild) {
 }
 
 TEST(MCTSUnitTests, Expand_CreatesOneChildPerLegalMove) {
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
 
     expand(root);
 
@@ -76,13 +68,11 @@ TEST(MCTSUnitTests, Expand_CreatesOneChildPerLegalMove) {
 }
 
 TEST(MCTSUnitTests, Backpropogate_UpdatesVisitsAndScoresOnAncestors) {
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     root->visits = 2;
     root->total_score = {10.0f};
 
-    auto child = std::make_shared<Node<CoinFlipState, Move>>();
-    child->state = CoinFlipState();
+    auto child = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     child->visits = 0;
     child->total_score = {3.0f};
     child->parent = root;

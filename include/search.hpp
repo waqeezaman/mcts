@@ -166,17 +166,14 @@ requires MCTSState<State, Move>
 void expand(std::shared_ptr<Node<State, Move>> node){
 
     auto moves = node->state.getLegalMoves();
-    int num_players = node->state.getNumPlayers();
 
     node->children.reserve(moves.size());
 
     for (const auto& move : moves) {
-        auto child = std::make_shared<Node<State, Move>>();
-        child->state = node->state;
+        auto child = std::make_shared<Node<State, Move>>(node->state);
         child->state.applyMove(move);
         child->move_from_parent = move;
         child->parent = node;  // weak_ptr - doesn't increase refcount
-        child->total_score = std::vector<float>(num_players, 0.0f);
 
         node->children.push_back(child);
     }

@@ -117,8 +117,6 @@ struct TwoPlayerState {
 
 template <typename State>
 std::shared_ptr<Node<State, Move>> makeRoot(const State& state) {
-    auto root = std::make_shared<Node<State, Move>>();
-    root->state = state;
-    root->total_score = std::vector<float>(state.getNumPlayers(), 0.0f);
+    auto root = std::make_shared<Node<State, Move>>(state);
     return root;
 }

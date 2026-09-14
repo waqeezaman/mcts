@@ -1,8 +1,7 @@
 #include "test_helpers.hpp"
 
 TEST(MCTSIntegrationTests, Search_TerminalRootReturnsNullopt) {
-    auto root = std::make_shared<Node<TerminalState, Move>>();
-    root->state = TerminalState();
+    auto root = std::make_shared<Node<TerminalState, Move>>(TerminalState{});
 
     const auto result = search(root, 10, 0);
 

@@ -45,8 +45,7 @@ struct CoinFlipState {
 
 TEST(MCTSTests, testSearchInstantiation){
     // Test that search() works with shared_ptr
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     
     auto best_child_optional = search(root, 10, 42);
     
@@ -59,17 +58,14 @@ TEST(MCTSTests, testSearchInstantiation){
 
 TEST(MCTSTests, testUCBCalculation){
     // Test UCB calculation
-    auto parent_node = std::make_shared<Node<CoinFlipState, Move>>();
-    parent_node->state = CoinFlipState();
+    auto parent_node = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     parent_node->visits = 10;
     parent_node->total_score = {50};
     
     
-    auto node = std::make_shared<Node<CoinFlipState, Move>>();
-    node->state = CoinFlipState();
+    auto node = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
     node->visits = 10;
     node->total_score = {50};
-
 
     
     float ucb_value = ucb(*node, *parent_node);
@@ -90,8 +86,7 @@ TEST(MCTSTests, testRolloutReward){
 
 TEST(MCTSTests, testSearch){
 
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
 
     auto best_child_optional = search(root, 100, 0);
 
@@ -104,8 +99,7 @@ TEST(MCTSTests, testSearch){
 
 TEST(MCTSTests, testMultipleSearch){
 
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
 
     auto best_child_optional = search(root, 100, 0);
 
@@ -122,8 +116,7 @@ TEST(MCTSTests, testMultipleSearch){
 
 TEST(MCTSTests, testSearchUntilTerminal){
 
-    auto root = std::make_shared<Node<CoinFlipState, Move>>();
-    root->state = CoinFlipState();
+    auto root = std::make_shared<Node<CoinFlipState, Move>>(CoinFlipState{});
 
 
     while(!root->state.isTerminal()){
