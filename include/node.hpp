@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 #include <vector>
 
 #include "state.hpp"
@@ -31,7 +32,7 @@ struct Node {
     std::weak_ptr<Node<State, Move>> parent;
 
     /// Move applied to reach this node from the parent.
-    Move move_from_parent;
+    std::optional<Move> move_from_parent;
 
     /// Child nodes generated from legal moves in the current state.
     std::vector<std::shared_ptr<Node<State, Move>>> children;
