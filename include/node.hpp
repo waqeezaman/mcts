@@ -37,6 +37,8 @@ struct Node {
     /// Child nodes generated from legal moves in the current state.
     std::vector<std::shared_ptr<Node<State, Move>>> children;
 
+    bool expanded {false};
+
     explicit Node(State initial_state)
         : state(initial_state),
           total_score(state.getNumPlayers(), 0.0f) {}

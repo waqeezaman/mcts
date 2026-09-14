@@ -164,6 +164,8 @@ std::shared_ptr<Node<State, Move>> selectNode(std::shared_ptr<Node<State, Move>>
 template <typename State, typename Move>
 requires MCTSState<State, Move>
 void expand(std::shared_ptr<Node<State, Move>> node){
+    if(node->expanded) return;
+    node->expanded = true;
 
     auto moves = node->state.getLegalMoves();
 
